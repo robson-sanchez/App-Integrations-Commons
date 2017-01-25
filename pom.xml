@@ -98,6 +98,12 @@
                 <version>${spring.boot.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>org.glassfish.jersey.core</groupId>
+                <artifactId>jersey-client</artifactId>
+                <version>${jersey.client.version}</version>
+            </dependency>
+
             <!-- test -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
@@ -164,6 +170,7 @@
         <metrics.version>3.1.2</metrics.version>
         <spring.boot.version>1.4.2.RELEASE</spring.boot.version>
         <symphony.sbe.version>1.44.0</symphony.sbe.version>
+        <jersey.client.version>2.12</jersey.client.version>
 
         <!-- test -->
         <symphonySkipUnitTests>false</symphonySkipUnitTests>
