@@ -202,6 +202,16 @@ public class IntegrationProperties {
     return String.format("%s/pod", symphonyUrl);
   }
 
+  public String getIntegrationUrl() {
+    String symphonyUrl = getSymphonyUrl();
+
+    if (StringUtils.isEmpty(symphonyUrl)) {
+      return StringUtils.EMPTY;
+    }
+
+    return String.format("%s/integrationapi", symphonyUrl);
+  }
+
   public String getLoginUrl() {
     String symphonyUrl = getSymphonyUrl();
 
