@@ -1,6 +1,6 @@
 package org.symphonyoss.integration;
 
-import com.symphony.api.pod.model.V1Configuration;
+import org.symphonyoss.integration.service.model.Configuration;
 
 import org.symphonyoss.integration.authentication.AuthenticationProxy;
 import org.symphonyoss.integration.model.healthcheck.IntegrationHealth;
@@ -31,7 +31,7 @@ public class MockIntegration extends BaseIntegration {
   }
 
   @Override
-  public void onConfigChange(V1Configuration conf) {
+  public void onConfigChange(Configuration conf) {
     /* This has no implementation due to the nature of this class */
   }
 
@@ -50,7 +50,7 @@ public class MockIntegration extends BaseIntegration {
   }
 
   @Override
-  public V1Configuration getConfig() {
+  public Configuration getConfig() {
     return null;
   }
 

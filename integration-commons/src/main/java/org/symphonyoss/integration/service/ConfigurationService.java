@@ -16,8 +16,8 @@
 
 package org.symphonyoss.integration.service;
 
-import com.symphony.api.pod.model.ConfigurationInstance;
-import com.symphony.api.pod.model.V1Configuration;
+import org.symphonyoss.integration.service.model.ConfigurationInstance;
+import org.symphonyoss.integration.service.model.Configuration;
 
 import org.symphonyoss.integration.exception.config.IntegrationConfigException;
 
@@ -42,7 +42,7 @@ public interface ConfigurationService {
    * @return Configuration object
    * @throws IntegrationConfigException
    */
-  V1Configuration getConfigurationById(String configurationId, String userId);
+  Configuration getConfigurationById(String configurationId, String userId);
 
   /**
    * Get a particular configuration based on configuration type.
@@ -51,7 +51,7 @@ public interface ConfigurationService {
    * @return Configuration object
    * @throws IntegrationConfigException
    */
-  V1Configuration getConfigurationByType(String configurationType, String userId);
+  Configuration getConfigurationByType(String configurationType, String userId);
 
   /**
    * Create or update a configuration.
@@ -59,7 +59,7 @@ public interface ConfigurationService {
    * @param userId user to query configurations.
    * @throws IntegrationConfigException
    */
-  V1Configuration save(V1Configuration configuration, String userId);
+  Configuration save(Configuration configuration, String userId);
 
   /**
    * Get a particular configuration instance based on configuration instance identifier.
@@ -69,8 +69,7 @@ public interface ConfigurationService {
    * @return Configuration instance object
    * @throws IntegrationConfigException
    */
-  ConfigurationInstance getInstanceById(String configurationId, String instanceId, String userId)
-  ;
+  ConfigurationInstance getInstanceById(String configurationId, String instanceId, String userId);
 
   /**
    * Create or update a configuration instance.

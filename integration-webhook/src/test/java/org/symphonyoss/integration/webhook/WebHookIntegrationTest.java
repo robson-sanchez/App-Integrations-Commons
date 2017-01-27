@@ -37,8 +37,8 @@ import static org.mockito.Matchers.anyListOf;
 import com.symphony.api.agent.model.V2Message;
 import com.symphony.api.agent.model.V2MessageList;
 import com.symphony.api.pod.client.ApiException;
-import com.symphony.api.pod.model.ConfigurationInstance;
-import com.symphony.api.pod.model.V1Configuration;
+import org.symphonyoss.integration.service.model.ConfigurationInstance;
+import org.symphonyoss.integration.service.model.Configuration;
 
 import com.codahale.metrics.Timer;
 import com.google.common.cache.LoadingCache;
@@ -154,7 +154,7 @@ public class WebHookIntegrationTest extends MockKeystore {
 
     when(authenticationProxy.isAuthenticated(anyString())).thenReturn(true);
 
-    V1Configuration configuration = new V1Configuration();
+    Configuration configuration = new Configuration();
     configuration.setConfigurationId(CONFIGURATION_ID);
     configuration.setName("JIRA");
     configuration.setType(INTEGRATION_USER);
@@ -339,7 +339,7 @@ public class WebHookIntegrationTest extends MockKeystore {
     instance.setInstanceId("1234");
     instance.setOptionalProperties(optionalProperties);
 
-    V1Configuration configuration = mock(V1Configuration.class);
+    Configuration configuration = mock(Configuration.class);
     doReturn(true).when(configuration).getEnabled();
 
     doReturn(instance).when(configService).getInstanceById(anyString(), anyString(), anyString());
@@ -511,7 +511,7 @@ public class WebHookIntegrationTest extends MockKeystore {
 
   @Test(expected = WebHookDisabledException.class)
   public void testUnavailable() {
-    V1Configuration config = mockWHI.getConfig();
+    Configuration config = mockWHI.getConfig();
     config.setEnabled(false);
 
     doReturn(mockWHI.getConfig()).when(configService)

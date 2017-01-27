@@ -24,8 +24,8 @@ import static org.symphonyoss.integration.utils.WebHookConfigurationUtils.LAST_P
 import com.symphony.api.agent.model.V2BaseMessage;
 import com.symphony.api.agent.model.V2MessageList;
 import com.symphony.api.auth.client.ApiException;
-import com.symphony.api.pod.model.ConfigurationInstance;
-import com.symphony.api.pod.model.V1Configuration;
+import org.symphonyoss.integration.service.model.ConfigurationInstance;
+import org.symphonyoss.integration.service.model.Configuration;
 import com.symphony.logging.ISymphonyLogger;
 
 import com.codahale.metrics.Timer;
@@ -113,7 +113,7 @@ public abstract class WebHookIntegration extends BaseIntegration {
   /**
    * Local Configuration kept for faster processing.
    */
-  private V1Configuration config;
+  private Configuration config;
 
   /**
    * Represents the current circuit state that this integration uses to determine whether it is
@@ -192,13 +192,13 @@ public abstract class WebHookIntegration extends BaseIntegration {
   }
 
   private void updateConfiguration(String integrationUser) throws IntegrationConfigException {
-    V1Configuration config =
+    Configuration config =
         this.configService.getConfigurationByType(integrationUser, integrationUser);
     onConfigChange(config);
   }
 
   @Override
-  public void onConfigChange(V1Configuration conf) {
+  public void onConfigChange(Configuration conf) {
     this.config = conf;
   }
 
@@ -463,7 +463,7 @@ public abstract class WebHookIntegration extends BaseIntegration {
   }
 
   @Override
-  public V1Configuration getConfig() {
+  public Configuration getConfig() {
     return config;
   }
 
@@ -482,7 +482,7 @@ public abstract class WebHookIntegration extends BaseIntegration {
   public boolean isAvailable() {
     if (this.circuitClosed) {
       try {
-        V1Configuration whiConfiguration =
+        Configuration whiConfiguration =
             this.configService.getConfigurationById(config.getConfigurationId(), config.getType());
         if (!whiConfiguration.getEnabled()) {
           openCircuit();
