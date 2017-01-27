@@ -19,11 +19,11 @@ package org.symphonyoss.integration.exception.authentication;
 import java.util.List;
 
 /**
- * Should be extended to denote specific connectivity problems.
- *
+ * Denote connectivity problems with endpoint calls.
+ * It might be extended if specific information is needed.
  * Created by Milton Quilzini on 17/11/16.
  */
-public abstract class ConnectivityException extends AuthenticationException {
+public class ConnectivityException extends AuthenticationException {
 
   protected static final String DEFAULT_MESSAGE = "Integration Bridge can't reach %s service!";
 
