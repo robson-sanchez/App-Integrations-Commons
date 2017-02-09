@@ -55,6 +55,9 @@ module.exports = {
     new CopyWebpackPlugin([{
       from: './src/js/symphony-api.js'
     }]),
+    new CopyWebpackPlugin([{
+      from: './src/img', to: 'img'
+    }]),
   ],
   devServer: {
     contentBase: path.resolve(__dirname, 'dist'),

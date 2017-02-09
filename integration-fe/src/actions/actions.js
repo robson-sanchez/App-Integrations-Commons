@@ -28,6 +28,8 @@ export const ERROR = 'ERROR';
 
 const configurationId = Utils.getParameterByName('configurationId');
 
+const botUserId = Utils.getParameterByName('botUserId');
+
 export function fetchUserId() {
   const extendedUserService = SYMPHONY.services.subscribe('extended-user-service');
   const promisedUserId = extendedUserService.getUserId();
@@ -113,7 +115,7 @@ export function createStream(obj) {
   // if(obj.streamType === 'IM'){
   const streamService = SYMPHONY.services.subscribe('stream-service');
   const _streams = [];
-  const promisedIM = streamService.createIM([7627861919706]);
+  const promisedIM = streamService.createIM([botUserId]);
 
   return {
     type: CREATE_STREAM,

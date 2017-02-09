@@ -6,29 +6,12 @@ import './styles/styles.less';
 class TableInstance extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      instances: [],
-    };
     this.onConfigureNew = this.onConfigureNew.bind(this);
-  }
-
-  componentWillMount() {
-    this.setState({
-      instances: this.props.instanceList,
-    });
   }
 
   componentDidMount() {
     this.props.fetchUserId();
     this.props.fetchInstanceList();
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (this.props.instanceList !== nextProps.instanceList) {
-      this.setState({
-        instances: nextProps.instanceList,
-      });
-    }
   }
 
   onConfigureNew(e) {
@@ -38,12 +21,12 @@ class TableInstance extends Component {
   render() {
     let dataRowObj = {};
     return (
-      <div className='wrapper'>
+      <div className='wrapper table-instance'>
         <header>
           <h2>Configured Integrations</h2>
           <button onClick={this.onConfigureNew} className="button">Configure New</button>
         </header>
-        <table className='table-instance'>
+        <table className='instances'>
           <thead>
             <tr>
               <th><span>Description</span></th>
@@ -55,7 +38,7 @@ class TableInstance extends Component {
           </thead>
           <tbody>
             {
-              this.state.instances.map((item, index) => {
+              this.props.instanceList.map((item, index) => {
                 dataRowObj = {
                   description: item.description,
                   appName: this.props.appName,

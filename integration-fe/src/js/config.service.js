@@ -3,4 +3,5 @@ export default ({
   app_name: 'JIRA',
   IM_shorthand: 'JIRA', // will display "One on One with JIRA"
   toogleSetupInstructions: true,
+  logo: 'jira_logo.png',
 });
