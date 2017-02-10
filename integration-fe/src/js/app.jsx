@@ -9,6 +9,7 @@ import { Utils } from './utils.service';
 import Home from '../views/Home';
 import CreateView from '../views/CreateView';
 import configureStore from '../store/configureStore';
+import '../../vendors/font-awesome-4.6.3/css/font-awesome.min.css';
 
 const store = configureStore();
 
