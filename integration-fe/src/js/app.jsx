@@ -7,6 +7,7 @@ import { Link, Router, Route, hashHistory, IndexRoute } from 'react-router';
 import reducers from '../reducers/reducers';
 import { Utils } from './utils.service';
 import Home from '../views/Home';
+import CreateView from '../views/CreateView';
 import configureStore from '../store/configureStore';
 
 const store = configureStore();
@@ -33,7 +34,10 @@ let themeSize;
 function loadApplication(rooms) {
   render(
     <Provider store={store}>
-      <Home />
+      <Router history={hashHistory}>
+        <Route path='/' component={Home} />
+        <Route path='/create-view' component={CreateView} />
+      </Router>
     </Provider>,
     document.getElementById('app')
   );
