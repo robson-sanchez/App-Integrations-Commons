@@ -33,9 +33,9 @@ class SetupInstructions extends Component {
 
   showHideInstructions() {
     if (this.state.hidden) {
-      this.content.style.maxHeight = '5000px';
+      this.content.style.maxHeight = '312.5rem';
     } else {
-      this.content.style.maxHeight = '70px';
+      this.content.style.maxHeight = '4.375rem';
     }
 
     this.setState({
