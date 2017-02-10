@@ -1,18 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class CreateView extends Component {
-
-  componentDidMount() {
-
-  }
-
-  render() {
-    return (
-      <div>
-        Create View
-      </div>
-    );
-  }
-}
+const CreateView = () => (
+  <div>
+    Create View
+  </div>
+);
 
 export default CreateView;
+
