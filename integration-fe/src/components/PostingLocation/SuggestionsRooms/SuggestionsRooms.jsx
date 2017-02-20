@@ -1,11 +1,8 @@
-/* eslint-disable react/no-unused-prop-types */
-/* eslint-disable no-debugger */
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-console */
 import React, { PropTypes, Component } from 'react';
 import './styles/styles.less';
 
-class SuggestionsRooms extends Component {
+// Use named export for unconnected component (for tests)
+export class SuggestionsRooms extends Component {
   constructor(props) {
     super(props);
 
