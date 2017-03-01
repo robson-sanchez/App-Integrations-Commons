@@ -21,5 +21,6 @@ module.exports = {
       "no-shadow": 0,
       "quotes": [2, "single"],
       "import/no-named-as-default": "warn",
+      "array-callback-return": "warn",
     },
 };
