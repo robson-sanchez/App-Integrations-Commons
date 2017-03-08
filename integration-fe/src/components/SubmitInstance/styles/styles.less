@@ -1,0 +1,21 @@
+@import '../../../styles/lib.less';
+
+.submit-container {
+  flex-flow: row nowrap;
+  justify-content: flex-end;
+  max-width: @max-width-component;
+  padding: 0.9375rem 0 0 0;
+
+  .button {
+    min-width: 6.25rem;
+
+    &:last-child {
+      margin-right: 0 !important;
+    }
+  }
+}
+
+.dark .submit-container,
+.dark-contrast .submit-container {
+  border-top: 0.0625rem solid rgba(255,255,255,0.8);
+}

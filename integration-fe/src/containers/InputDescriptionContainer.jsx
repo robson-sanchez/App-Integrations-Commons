@@ -5,7 +5,7 @@ import {
 import InputDescription from '../components/InputDescription/InputDescription';
 
 const mapStateToProps = state => ({
-  name: state.entities.instance.name,
+  name: state.entities.instance.name || '',
 });
 
 const mapDispatchToProps = dispatch => ({

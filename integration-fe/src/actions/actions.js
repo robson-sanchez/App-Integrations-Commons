@@ -2,7 +2,6 @@
 /* eslint-disable no-debugger */
 /* eslint-disable no-undef */
 /* eslint-disable no-alert */
-import axios from 'axios';
 import { Utils } from '../js/utils.service';
 
 export const FETCH_USER_ID_SUCCESS = 'FETCH_USER_ID_SUCCESS';
@@ -141,11 +140,11 @@ export function saveInstance(streams) {
       const promisedInstance = integrationConfigService.createConfigurationInstance(
          configurationId, payload);
 
-      // promisedInstance().then((data) => {
-      //   dispatch({ type: SAVE_INSTANCE_SUCCESS });
-      // }, (err) => {
-      //   dispatch(setError(err));
-      // });
+      promisedInstance.then((data) => {
+        dispatch({ type: SAVE_INSTANCE_SUCCESS });
+      }, (err) => {
+        dispatch(setError(err));
+      });
     }, (err) => {
       dispatch(setError(err));
     });

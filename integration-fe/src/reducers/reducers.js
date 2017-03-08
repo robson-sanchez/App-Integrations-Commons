@@ -80,6 +80,10 @@ const integrationApp = (state = INITIAL_STATE, action) => {
         },
         loading: false,
         error: null,
+        entities: {
+          ...state.entities,
+          status: 'idle',
+        },
       });
     case FETCH_USER_ROOMS_SUCCESS: {
       return Object.assign({}, state, {
@@ -122,7 +126,6 @@ const integrationApp = (state = INITIAL_STATE, action) => {
         },
       });
     case SAVE_INSTANCE_SUCCESS:
-      debugger;
       return Object.assign({}, state, {
         ...state,
         entities: {
@@ -131,9 +134,17 @@ const integrationApp = (state = INITIAL_STATE, action) => {
             ...state.entities.messages,
             successCreated: 'Instance Successfully Created',
           },
+          instance: {
+            ...state.entities.instance,
+            instanceId: null,
+            name: '',
+            creatorId: null,
+            streamType: 'IM',
+            lastPostedDate: null,
+          },
           status: 'saved',
         },
-        loading: false,
+        loading: true,
       });
     case ERROR:
       // 2nd one is network or server down errors

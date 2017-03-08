@@ -1,5 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 import { hashHistory } from 'react-router';
+import './styles/styles.less';
 
 export class SubmitInstance extends Component {
   componentWillReceiveProps(nextProps) {
@@ -12,9 +13,9 @@ export class SubmitInstance extends Component {
 
   render() {
     return (
-      <div className='submit-container'>
-        <button className='button' onClick={() => this.props.saveInstance()}>Add</button>
+      <div className='wrapper submit-container'>
         <button className='button cancel-link'>Cancel</button>
+        <button className='button' onClick={() => this.props.saveInstance()}>Add</button>
       </div>
     );
   }
