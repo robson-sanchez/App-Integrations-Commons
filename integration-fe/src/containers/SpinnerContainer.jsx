@@ -4,7 +4,7 @@ import Spinner from '../components/Spinner/Spinner';
 const mapStateToProps = state => (
   {
     loading: state.loading,
-    loadingMessage: state.messages.loadingInstances,
+    loadingMessage: state.entities.messages.loadingInstances,
   }
 );
 

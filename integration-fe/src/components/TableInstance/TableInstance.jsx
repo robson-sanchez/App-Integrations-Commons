@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/no-unused-prop-types */
 import React, { Component, PropTypes } from 'react';
 import DataRow from './DataRow';
 import Spinner from '../../containers/SpinnerContainer';
@@ -5,14 +7,11 @@ import '../../styles/main.less';
 import './styles/styles.less';
 
 class TableInstance extends Component {
-  componentWillMount() {
-    this.props.fetchUserId();
+  componentDidMount() {
     this.props.fetchInstanceList();
   }
 
   render() {
-    let dataRowObj = {};
-
     return (
       <div>
         <Spinner />
@@ -28,20 +27,18 @@ class TableInstance extends Component {
               </tr>
             </thead>
             <tbody>
-              {
-                this.props.instanceList.map((item, index) => {
-                  dataRowObj = {
-                    description: item.description,
-                    appName: this.props.appName,
-                    streamType: item.streamType,
-                    instanceId: item.instanceId,
-                    baseWebhookUrl: this.props.baseWebhookUrl,
-                    postingLocationRooms: item.postingLocationRooms,
-                    lastPosted: item.lastPosted,
-                  };
-                  return <DataRow instance={dataRowObj} key={index} id={index} />;
-                })
-              }
+              {this.props.instanceList.map((item, index) => {
+                const _instance = {
+                  name: item.name,
+                  appName: this.props.appName,
+                  streamType: item.streamType,
+                  instanceId: item.instanceId,
+                  baseWebhookUrl: this.props.baseWebhookUrl,
+                  postingLocationRooms: item.postingLocationRooms,
+                  lastPosted: item.lastPosted,
+                };
+                return <DataRow instance={_instance} key={index} id={index} />;
+              })}
             </tbody>
           </table>
         </div>
@@ -51,7 +48,6 @@ class TableInstance extends Component {
 }
 
 TableInstance.propTypes = {
-  fetchUserId: PropTypes.func.isRequired,
   fetchInstanceList: PropTypes.func.isRequired,
   instanceList: PropTypes.arrayOf(PropTypes.object).isRequired,
   appName: PropTypes.string.isRequired,

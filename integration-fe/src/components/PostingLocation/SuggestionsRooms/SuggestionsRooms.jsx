@@ -170,6 +170,8 @@ export class SuggestionsRooms extends Component {
       filters: this.state.filters.concat([filter]),
       suggestionsList: suggestions.slice(),
     });
+
+    this.props.addStreamToInstance(filter.threadId);
     this.input.value = '';
     this.input.focus();
   }
@@ -192,6 +194,8 @@ export class SuggestionsRooms extends Component {
       suggestionsList: _suggestions.slice(),
       filters: _filters.slice(),
     });
+
+    this.props.removeStreamFromInstance(_id);
   }
 
   sort(_obj, key) {
@@ -267,6 +271,8 @@ export class SuggestionsRooms extends Component {
 
 SuggestionsRooms.propTypes = {
   fetchUserRooms: PropTypes.func.isRequired,
+  addStreamToInstance: PropTypes.func.isRequired,
+  removeStreamFromInstance: PropTypes.func.isRequired,
   userRooms: PropTypes.arrayOf(PropTypes.object).isRequired,
   loading: PropTypes.bool.isRequired,
 };

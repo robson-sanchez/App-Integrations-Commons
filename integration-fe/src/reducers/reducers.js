@@ -1,13 +1,11 @@
 /* eslint-disable no-unused-vars */
+/* eslint-disable no-debugger */
 import { Utils } from '../js/utils.service';
 import config from '../js/config.service';
 
 import {
-  FETCH_USER_ID,
   FETCH_USER_ID_SUCCESS,
-  FETCH_INSTANCE_LIST,
   FETCH_INSTANCE_LIST_SUCCESS,
-  FETCH_USER_ROOMS,
   FETCH_USER_ROOMS_SUCCESS,
   EDIT_INSTANCE,
   EDIT_INSTANCE_SUCCESS,
@@ -16,7 +14,10 @@ import {
   CREATE_STREAM,
   CREATE_STREAM_SUCCESS,
   SWITCH_STREAM_TYPE,
-  CHANGE_DESCRIPTION,
+  CHANGE_INSTANCE_NAME,
+  ADD_STREAM_TO_INSTANCE,
+  REMOVE_STREAM_FROM_INSTANCE,
+  SAVE_INSTANCE_SUCCESS,
   ERROR,
 } from '../actions/actions';
 
@@ -29,88 +30,110 @@ const messages = {
 };
 
 const INITIAL_STATE = {
-  instances: [],
-  description: '',
+  userId: null,
+  configurationId,
   loading: true,
   error: null,
-  activeInstance: null,
-  streamType: 'IM',
-  appName: config.app_name,
-  userRooms: [],
-  userId: null,
-  baseWebhookUrl,
   appId,
-  configurationId,
-  messages,
+  appName: config.app_name,
+  baseWebhookUrl,
+  ui: {
+    instances: [],
+    userRooms: [],
+    optionalProperties: [],
+  },
+  entities: {
+    instance: {
+      instanceId: null,
+      name: '',
+      configurationId,
+      creatorId: null,
+      streamType: 'IM',
+      lastPostedDate: null,
+    },
+    streams: [],
+    optionalProperties: null,
+    webHookURL: null,
+    memberShipAdded: false,
+    messages: {
+      loadingInstances: 'Searching for instances...',
+    },
+    status: 'idle',
+  },
 };
 
 const integrationApp = (state = INITIAL_STATE, action) => {
   let error;
-
   switch (action.type) {
-    case FETCH_USER_ID:
-      return Object.assign({}, state, {
-        ...state,
-        loading: true,
-      });
     case FETCH_USER_ID_SUCCESS:
       return Object.assign({}, state, {
         ...state,
-        error: null,
         loading: false,
-        userId: action.payload,
+        userId: action.payload.toString(),
       });
-    case FETCH_INSTANCE_LIST: {
-      return Object.assign({}, state, {
-        ...state,
-        loading: true,
-        error: null,
-        activeInstance: null,
-      });
-    }
     case FETCH_INSTANCE_LIST_SUCCESS:
       return Object.assign({}, state, {
         ...state,
-        instances: action.payload.slice(),
+        ui: {
+          ...state.ui,
+          instances: state.ui.instances.concat(action.payload.slice()),
+        },
         loading: false,
         error: null,
-      });
-    case FETCH_USER_ROOMS:
-      return Object.assign({}, state, {
-        ...state,
-        loading: true,
       });
     case FETCH_USER_ROOMS_SUCCESS: {
       return Object.assign({}, state, {
         ...state,
-        userRooms: action.payload.slice(),
+        ui: {
+          ...state.ui,
+          userRooms: state.ui.userRooms.concat(action.payload.slice()),
+        },
         loading: false,
       });
     }
-    case CREATE_STREAM: // this new stream will be used to create the new instance...
-      return Object.assign({}, state, {
-        ...state,
-        loading: true,
-      });
-    case CREATE_INSTANCE_SUCCESS:
-      return Object.assign({}, state, {
-        ...state,
-        instances: [
-          ...state.instances,
-          action.payload,
-        ],
-        activeInstance: action.payload,
-        loading: false,
-      });
     case SWITCH_STREAM_TYPE:
       return Object.assign({}, state, {
         ...state,
-        streamType: action.payload,
+        entities: {
+          ...state.entities,
+          instance: {
+            ...state.entities.instance,
+            streamType: action.payload,
+          },
+        },
       });
-    case CHANGE_DESCRIPTION:
+    case CHANGE_INSTANCE_NAME:
       return Object.assign({}, state, {
         ...state,
-        description: action.payload,
+        entities: {
+          ...state.entities,
+          instance: {
+            ...state.entities.instance,
+            name: action.payload,
+          },
+        },
+      });
+    case ADD_STREAM_TO_INSTANCE:
+      return Object.assign({}, state, {
+        ...state,
+        entities: {
+          ...state.entities,
+          streams: state.entities.streams.concat(action.payload),
+        },
+      });
+    case SAVE_INSTANCE_SUCCESS:
+      debugger;
+      return Object.assign({}, state, {
+        ...state,
+        entities: {
+          ...state.entities,
+          messages: {
+            ...state.entities.messages,
+            successCreated: 'Instance Successfully Created',
+          },
+          status: 'saved',
+        },
+        loading: false,
       });
     case ERROR:
       // 2nd one is network or server down errors

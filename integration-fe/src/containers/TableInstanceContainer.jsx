@@ -1,3 +1,5 @@
+/* eslint-disable no-debugger */
+/* eslint-disable no-unused-vars */
 import { connect } from 'react-redux';
 import {
   fetchUserId,
@@ -10,35 +12,21 @@ import {
 } from '../actions/actions';
 import TableInstance from '../components/TableInstance/TableInstance';
 
-const mapStateToProps = state => (
-  {
-    instanceList: state.instances,
-    baseWebhookUrl: state.baseWebhookUrl,
-    appName: state.appName,
-    loading: state.loading,
-  }
-);
+const mapStateToProps = state => ({
+  instanceList: state.ui.instances,
+  baseWebhookUrl: state.baseWebhookUrl,
+  appName: state.appName,
+  loading: state.loading,
+  memberShipAdded: state.memberShipAdded,
+  counter: state.entities.counter,
+});
 
 const mapDispatchToProps = dispatch => (
   {
     fetchInstanceList: () => {
-      dispatch(fetchUserRooms()).then((rooms) => {
-        dispatch(fetchUserRoomsSuccess(rooms));
-        dispatch(fetchInstanceList()).then((list) => {
-          dispatch(fetchInstanceListSuccess(list));
-        }, (error) => {
-          setError(error);
-        });
-      }, (error) => {
-        setError(error);
-      });
-    },
-    fetchUserId: () => {
-      dispatch(fetchUserId()).then((user) => {
-        dispatch(fetchUserIdSuccess(user));
-      }, (error) => {
-        setError(error);
-      });
+      dispatch(fetchUserId());
+      dispatch(fetchUserRooms());
+      dispatch(fetchInstanceList());
     },
   }
 );

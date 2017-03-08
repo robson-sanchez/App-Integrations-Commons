@@ -5,7 +5,7 @@ import {
 import PostingLocation from '../components/PostingLocation/PostingLocation';
 
 const mapStateToProps = state => ({
-  streamType: state.streamType,
+  streamType: state.entities.instance.streamType,
 });
 
 const mapDispatchToProps = dispatch => ({

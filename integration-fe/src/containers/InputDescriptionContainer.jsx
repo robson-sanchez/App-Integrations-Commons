@@ -1,15 +1,15 @@
 import { connect } from 'react-redux';
 import {
-  changeDescription,
+  changeInstanceName,
 } from '../actions/actions';
 import InputDescription from '../components/InputDescription/InputDescription';
 
 const mapStateToProps = state => ({
-  description: state.description,
+  name: state.entities.instance.name,
 });
 
 const mapDispatchToProps = dispatch => ({
-  handleChange: (value) => { dispatch(changeDescription(value)); },
+  handleChange: (value) => { dispatch(changeInstanceName(value)); },
 });
 
 const InputDescriptionContainer = connect(

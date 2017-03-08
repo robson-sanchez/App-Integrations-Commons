@@ -2,16 +2,23 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+// import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
 import { Link, Router, Route, hashHistory, IndexRoute } from 'react-router';
 import reducers from '../reducers/reducers';
 import { Utils } from './utils.service';
 import Routes from '../routes/Routes';
-import configureStore from '../store/configureStore';
+// import configureStore from '../store/configureStore';
 import '../../vendors/font-awesome-4.6.3/css/font-awesome.min.css';
 
-const store = configureStore();
-
+// const store = configureStore();
+// const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
+// const store = createStoreWithMiddleware(reducers);
+const store = createStore(
+  reducers,
+  applyMiddleware(thunk)
+);
 
 const params = {
   appId: Utils.getParameterByName('id'),

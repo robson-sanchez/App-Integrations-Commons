@@ -1,14 +1,17 @@
+/* eslint-disable no-debugger */
 import { connect } from 'react-redux';
 import {
   fetchUserRooms,
   fetchUserRoomsSuccess,
+  addStreamToInstance,
+  removeStreamFromInstance,
   setError,
 } from '../../../actions/actions';
 
 import SuggestionsRooms from './SuggestionsRooms';
 
 const mapStateToProps = state => ({
-  userRooms: state.userRooms,
+  userRooms: state.ui.userRooms,
   loading: state.loading,
 });
 
@@ -20,6 +23,8 @@ const mapDispatchToProps = dispatch => ({
       setError(error);
     });
   },
+  addStreamToInstance: (stream) => { dispatch(addStreamToInstance(stream)); },
+  removeStreamFromInstance: (stream) => { dispatch(removeStreamFromInstance(stream)); },
 });
 
 const SuggestionsRoomsContainer = connect(
