@@ -6,7 +6,7 @@ export class SubmitInstance extends Component {
   componentWillReceiveProps(nextProps) {
     if (this.props.status !== nextProps.status) {
       if (nextProps.status === 'saved') {
-        hashHistory.push('/');
+        hashHistory.push('/instance-created');
       }
     }
   }

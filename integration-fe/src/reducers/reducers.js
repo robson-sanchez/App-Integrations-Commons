@@ -18,6 +18,7 @@ import {
   ADD_STREAM_TO_INSTANCE,
   REMOVE_STREAM_FROM_INSTANCE,
   SAVE_INSTANCE_SUCCESS,
+  SAVE_INSTANCE_CONFIRMATION,
   ERROR,
 } from '../actions/actions';
 
@@ -145,6 +146,14 @@ const integrationApp = (state = INITIAL_STATE, action) => {
           status: 'saved',
         },
         loading: true,
+      });
+    case SAVE_INSTANCE_CONFIRMATION:
+      return Object.assign({}, state, {
+        ...state,
+        entities: {
+          ...state.entities,
+          status: 'saved',
+        },
       });
     case ERROR:
       // 2nd one is network or server down errors

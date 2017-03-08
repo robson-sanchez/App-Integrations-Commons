@@ -12,6 +12,7 @@ export const SWITCH_STREAM_TYPE = 'SWITCH_STREAM_TYPE';
 export const ADD_STREAM_TO_INSTANCE = 'ADD_STREAM_TO_INSTANCE';
 export const ADD_ROOM_MEMBER_SHIP = 'ADD_ROOM_MEMBER_SHIP';
 export const SAVE_INSTANCE_SUCCESS = 'SAVE_INSTANCE_SUCCESS';
+export const SAVE_INSTANCE_CONFIRMATION = 'SAVE_INSTANCE_CONFIRMATION';
 export const CHANGE_INSTANCE_NAME = 'CHANGE_INSTANCE_NAME';
 export const ERROR = 'ERROR';
 
@@ -104,6 +105,12 @@ export function changeInstanceName(name) {
   };
 }
 
+export function saveInstanceConfirmation() {
+  return {
+    type: SAVE_INSTANCE_CONFIRMATION,
+  };
+}
+
 export function saveInstance(streams) {
   debugger;
   // for each stream, add membership
@@ -141,7 +148,7 @@ export function saveInstance(streams) {
          configurationId, payload);
 
       promisedInstance.then((data) => {
-        dispatch({ type: SAVE_INSTANCE_SUCCESS });
+        dispatch({ type: SAVE_INSTANCE_CONFIRMATION });
       }, (err) => {
         dispatch(setError(err));
       });
