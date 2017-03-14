@@ -1,4 +1,7 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/no-unused-prop-types */
 import React, { Component, PropTypes } from 'react';
+import { hashHistory } from 'react-router';
 import './styles/styles.less';
 import { copyToClipboard } from '../../js/utils.service';
 
@@ -36,6 +39,7 @@ class DataRow extends Component {
 
   onClickEdit(e) {
     e.preventDefault();
+    hashHistory.push('/edit-view');
   }
 
   onClickRemove(e) {
@@ -107,10 +111,10 @@ class DataRow extends Component {
 DataRow.propTypes = {
   instance: PropTypes.shape({
     name: PropTypes.string.isRequired,
-    appName: PropTypes.string.isRequired,
+    appName: PropTypes.string,
     streamType: PropTypes.string.isRequired,
-    instanceId: PropTypes.string.isRequired,
-    baseWebhookUrl: PropTypes.string.isRequired,
+    instanceId: PropTypes.string,
+    baseWebhookUrl: PropTypes.string,
     postingLocationRooms: PropTypes.arrayOf(PropTypes.object),
     lastPosted: PropTypes.string.isRequired,
   }),

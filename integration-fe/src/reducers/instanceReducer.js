@@ -23,6 +23,13 @@ const instanceReducer = (state = { saved: false }, action) => {
         streams: state.streams.filter(item => item !== action.stream),
       });
     }
+    case 'EDIT_INSTANCE':
+      return Object.assign({}, state, {
+        ...state,
+        name: action.name,
+        streamType: action.streamType,
+        streams: action.streams,
+      });
     case 'SAVE_INSTANCE':
       return Object.assign({}, state, {
         ...state,

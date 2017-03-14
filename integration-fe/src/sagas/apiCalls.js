@@ -32,6 +32,10 @@ export const getRooms = () => {
   return extendedUserService.getRooms().then(data => Utils.getUserRooms(data));
 };
 
+// export const addMemberShip = () => {
+//   const streamService = SYMPHONY.services.subscribe('stream-service');
+// };
+
 export const getList = () => {
   const integrationConfService = SYMPHONY.services.subscribe('integration-config');
   return integrationConfService.getConfigurationInstanceList(configurationId)
