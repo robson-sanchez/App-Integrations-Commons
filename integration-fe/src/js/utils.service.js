@@ -1,5 +1,3 @@
-/* eslint-disable no-console*/
-/* eslint-disable no-debugger */
 export const Utils = (function utils() {
   const pub = {};
   const userRooms = [];
@@ -96,7 +94,6 @@ export const Utils = (function utils() {
       instance.notPostingLocationRooms = aux.slice();
       return instance;
     });
-
     return instances;
   };
 

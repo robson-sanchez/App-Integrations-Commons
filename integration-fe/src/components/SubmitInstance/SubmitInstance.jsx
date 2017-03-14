@@ -4,7 +4,7 @@ import { hashHistory } from 'react-router';
 export class SubmitInstance extends Component {
   componentWillReceiveProps(nextProps) {
     if (this.props.status !== nextProps.status) {
-      if (nextProps.status === 'saved') {
+      if (nextProps.status) {
         hashHistory.push('/');
       }
     }
@@ -22,7 +22,7 @@ export class SubmitInstance extends Component {
 
 SubmitInstance.propTypes = {
   saveInstance: PropTypes.func.isRequired,
-  status: PropTypes.string.isRequired,
+  status: PropTypes.bool,
 };
 
 export default SubmitInstance;

@@ -1,24 +1,11 @@
-/* eslint-disable no-unused-vars */
+import 'babel-polyfill';
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-// import { createStore } from 'redux';
-import { createStore, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
-import { Link, Router, Route, hashHistory, IndexRoute } from 'react-router';
-import reducers from '../reducers/reducers';
-import { Utils } from './utils.service';
 import Routes from '../routes/Routes';
-// import configureStore from '../store/configureStore';
+import configureStore from '../store/configureStore';
+import { Utils } from './utils.service';
 import '../../vendors/font-awesome-4.6.3/css/font-awesome.min.css';
-
-// const store = configureStore();
-// const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
-// const store = createStoreWithMiddleware(reducers);
-const store = createStore(
-  reducers,
-  applyMiddleware(thunk)
-);
 
 const params = {
   appId: Utils.getParameterByName('id'),
@@ -38,7 +25,8 @@ const dependencies = [
 let themeColor;
 let themeSize;
 
-function loadApplication(rooms) {
+function loadApplication() {
+  const store = configureStore();
   render(
     <Provider store={store}>
       <Routes />
@@ -47,19 +35,9 @@ function loadApplication(rooms) {
   );
 }
 
-function connectApplication(response) {
-  const userId = response.userReferenceId;
-
-  // Subscribe to Symphony's services
-  const modulesService = SYMPHONY.services.subscribe('modules');
-  const navService = SYMPHONY.services.subscribe('applications-nav');
+function connectApplication() {
   const uiService = SYMPHONY.services.subscribe('ui');
-  const shareService = SYMPHONY.services.subscribe('share');
-  const extendedUserService = SYMPHONY.services.subscribe('extended-user-service');
-
-  const promisedRooms = extendedUserService.invoke('getRooms');
-
-  promisedRooms.then(loadApplication);
+  loadApplication();
 
   // UI: Listen for theme change events
   uiService.listen('themeChangeV2', () => {

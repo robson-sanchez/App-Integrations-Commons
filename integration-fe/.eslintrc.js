@@ -22,5 +22,6 @@ module.exports = {
       "quotes": [2, "single"],
       "import/no-named-as-default": "warn",
       "array-callback-return": "warn",
+      "import/prefer-default-export": "warn",
     },
 };

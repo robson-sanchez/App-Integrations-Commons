@@ -1,8 +1,10 @@
+var webpack = require('webpack');
 var path = require("path"),
   CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: {
+    babelPolyfill: 'babel-polyfill',
     controller: path.resolve(__dirname, "./src/js/controller.js"),
     app: path.resolve(__dirname, "./src/js/app.jsx")
   },
@@ -10,7 +12,7 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
     filename: "[name].bundle.js"
   },
-  evtool: 'source-map',
+  devtool: 'source-map',
   module: {
     preLoaders: [
       { test: /\.jsx?$/, loader: 'eslint', exclude: /node_modules/ }
@@ -43,6 +45,10 @@ module.exports = {
     failOnError: true,
   },
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('development'), // Tells React to build in either dev or prod modes. https://facebook.github.io/react/downloads.html (See bottom)
+      __DEV__: true
+    }),
     new CopyWebpackPlugin([{
       from: './src/html/app.html'
     }]),

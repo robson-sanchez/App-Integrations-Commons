@@ -1,20 +1,18 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/no-unused-prop-types */
 import React, { Component, PropTypes } from 'react';
 import DataRow from './DataRow';
-import Spinner from '../../containers/SpinnerContainer';
+import Spinner from '../../components/Spinner/Spinner';
 import '../../styles/main.less';
 import './styles/styles.less';
 
 class TableInstance extends Component {
   componentDidMount() {
-    this.props.fetchInstanceList();
+    // -->
   }
 
   render() {
     return (
       <div>
-        <Spinner />
+        <Spinner loading={this.props.loading} />
         <div className='wrapper table-instance'>
           <table className={this.props.loading ? 'instances' : 'instances table-opacity-1'}>
             <thead>
@@ -33,7 +31,7 @@ class TableInstance extends Component {
                   appName: this.props.appName,
                   streamType: item.streamType,
                   instanceId: item.instanceId,
-                  baseWebhookUrl: this.props.baseWebhookUrl,
+                  baseWebhookUrl: this.props.baseWebHookURL,
                   postingLocationRooms: item.postingLocationRooms,
                   lastPosted: item.lastPosted,
                 };
@@ -48,11 +46,10 @@ class TableInstance extends Component {
 }
 
 TableInstance.propTypes = {
-  fetchInstanceList: PropTypes.func.isRequired,
-  instanceList: PropTypes.arrayOf(PropTypes.object).isRequired,
   appName: PropTypes.string.isRequired,
-  baseWebhookUrl: PropTypes.string.isRequired,
+  instanceList: PropTypes.arrayOf(PropTypes.object).isRequired,
   loading: PropTypes.bool.isRequired,
+  baseWebHookURL: PropTypes.string.isRequired,
 };
 
 export default TableInstance;
