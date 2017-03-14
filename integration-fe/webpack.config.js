@@ -4,6 +4,7 @@ var path = require("path"),
 
 module.exports = {
   entry: {
+    babelPolyfill: 'babel-polyfill',
     controller: path.resolve(__dirname, "./src/js/controller.js"),
     app: path.resolve(__dirname, "./src/js/app.jsx")
   },
