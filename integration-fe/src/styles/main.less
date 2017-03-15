@@ -17,12 +17,28 @@
   }
 }
 
+.submit-container {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-end;
+  width: 100%;
+  max-width: @max-width-component;
+  padding-top: 0.625rem;
+
+  button {
+    margin-right: 0;
+    min-width: 6.25rem;
+  }
+}
+
 .dark, .dark-contrast {
   .wrapper {
     header {
       h2, h2 label { color: #fff; }
     }
   }
+
+  .submit-container { border-top: 0.0625rem solid rgba(255,255,255,0.8); }
 }
 
 .light, .light-contrast {
@@ -31,4 +47,6 @@
       h2, h2 label { color: #000; }
     }
   }
+
+  .submit-container { border-top: 0.0625rem solid rgba(0,0,0,0.1); }
 }

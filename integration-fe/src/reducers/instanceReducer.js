@@ -1,6 +1,8 @@
+/* eslint-disable no-debugger */
 const instanceReducer = (state = { saved: false }, action) => {
   switch (action.type) {
     case 'GET_ACTIVE_INSTANCE':
+      debugger;
       return action.instance;
     case 'CHANGE_INSTANCE_NAME':
       return Object.assign({}, state, {
@@ -11,31 +13,37 @@ const instanceReducer = (state = { saved: false }, action) => {
       return Object.assign({}, state, {
         ...state,
         streamType: action.streamType,
+        postingLocationRooms: [],
+        streams: [],
       });
     case 'ADD_STREAM_TO_INSTANCE':
       return Object.assign({}, state, {
         ...state,
-        streams: state.streams.concat([action.stream]),
+        postingLocationRooms: state.postingLocationRooms.concat([action.room]),
+        streams: state.streams.concat([action.room.threadId]),
       });
-    case 'REMOVE_STREAM_FROM_INSTANCE': {
+    case 'REMOVE_STREAM_FROM_INSTANCE':
       return Object.assign({}, state, {
         ...state,
-        streams: state.streams.filter(item => item !== action.stream),
+        postingLocationRooms: state.postingLocationRooms.filter(
+          room => room.threadId !== action.room.threadId),
+        streams: state.streams.filter(item => item !== action.room.threadId),
       });
-    }
-    case 'EDIT_INSTANCE':
+    /* case 'SET_BASE_WEBHOOK_URL':
+      debugger;
       return Object.assign({}, state, {
         ...state,
-        name: action.name,
-        streamType: action.streamType,
-        streams: action.streams,
-      });
-    case 'SAVE_INSTANCE':
+        baseWebhookUrl: action.url,
+      });*/
+    case 'SAVE_INSTANCE_SUCCESS':
       return Object.assign({}, state, {
         ...state,
-        name: '',
-        streamType: 'IM',
-        streams: [],
+        name: action.instance.name,
+        creatorId: action.instance.creatorId,
+        instanceId: action.instance.instanceId,
+        streamType: action.instance.streamType,
+        streams: action.instance.streams.slice(),
+        lastPosted: action.instance.lastPosted,
         saved: true,
       });
     default:

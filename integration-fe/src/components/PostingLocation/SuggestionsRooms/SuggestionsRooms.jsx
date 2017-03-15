@@ -1,3 +1,4 @@
+/* eslint-disable no-debugger */
 import React, { PropTypes, Component } from 'react';
 import RoomBox from '../RoomBox/RoomBox';
 import './styles/styles.less';
@@ -150,9 +151,10 @@ export class SuggestionsRooms extends Component {
   addFilter(e, filter) {
     e.preventDefault();
     const suggestions = this.state.suggestionsList.slice();
+    let postingLocationRoom;
     suggestions.some((item, idx) => {
       if (item.name === filter.name) {
-        suggestions.splice(idx, 1);
+        postingLocationRoom = suggestions.splice(idx, 1)[0];
       }
     });
 
@@ -162,32 +164,31 @@ export class SuggestionsRooms extends Component {
       filters: this.state.filters.concat([filter]),
       suggestionsList: suggestions.slice(),
     });
-
-    this.props.addStreamToInstance(filter.threadId);
+    this.props.addStreamToInstance(postingLocationRoom);
     this.input.value = '';
     this.input.focus();
   }
 
   removeFilter(_id) {
-    const _suggestions = this.state.suggestionsList.slice();
+    const suggestions = this.state.suggestionsList.slice();
     const _filters = this.state.filters.slice();
-
+    let postingLocationRoom;
     _filters.some((item, idx) => {
       if (item.threadId === _id) {
-        _suggestions.push(item);
+        suggestions.push(item);
+        postingLocationRoom = item;
         _filters.splice(idx, 1);
       }
     });
 
-    this.sort(_suggestions, 'name');
+    this.sort(suggestions, 'name');
     this.input.value = '';
     this.input.focus();
     this.setState({
-      suggestionsList: _suggestions.slice(),
+      suggestionsList: suggestions.slice(),
       filters: _filters.slice(),
     });
-
-    this.props.removeStreamFromInstance(_id);
+    this.props.removeStreamFromInstance(postingLocationRoom);
   }
 
   sort(_obj, key) {

@@ -1,3 +1,4 @@
+/* eslint-disable no-debugger */
 import React, { Component, PropTypes } from 'react';
 import DataRow from './DataRow';
 import Spinner from '../../components/Spinner/Spinner';
@@ -6,12 +7,23 @@ import './styles/styles.less';
 
 class TableInstance extends Component {
   componentDidMount() {
-    // -->
+    debugger;
+    this.props.getInstanceList();
   }
+
+  /* componentWillReceiveProps(nextProps) {
+    debugger;
+    if (this.props.loading !== nextProps.loading) {
+      if (nextProps.loading) {
+        this.props.getInstanceList();
+      }
+    }
+  }*/
 
   render() {
     return (
       <div>
+        <span>Hi</span>
         <Spinner loading={this.props.loading} />
         <div className='wrapper table-instance'>
           <table className={this.props.loading ? 'instances' : 'instances table-opacity-1'}>
@@ -35,6 +47,7 @@ class TableInstance extends Component {
                   postingLocationRooms: item.postingLocationRooms,
                   lastPosted: item.lastPosted,
                 };
+                debugger;
                 return <DataRow instance={_instance} key={index} id={index} />;
               })}
             </tbody>
@@ -50,6 +63,7 @@ TableInstance.propTypes = {
   instanceList: PropTypes.arrayOf(PropTypes.object).isRequired,
   loading: PropTypes.bool.isRequired,
   baseWebHookURL: PropTypes.string.isRequired,
+  getInstanceList: PropTypes.func.isRequired,
 };
 
 export default TableInstance;

@@ -1,5 +1,5 @@
 /* eslint-disable no-debugger */
-const baseWebHookURL = (state = '', action) => {
+/* const baseWebHookURL = (state = '', action) => {
   switch (action.type) {
     case 'SET_BASE_WEBHOOK_URL':
       return action.payload;
@@ -8,4 +8,4 @@ const baseWebHookURL = (state = '', action) => {
   }
 };
 
-export default baseWebHookURL;
+export default baseWebHookURL;*/

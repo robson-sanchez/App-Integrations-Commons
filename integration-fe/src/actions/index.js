@@ -1,6 +1,5 @@
 /* eslint-disable no-debugger */
 /* eslint-disable no-unused-vars */
-import { call } from 'redux-saga/effects';
 
 export const changeInstanceName = name => ({
   type: 'CHANGE_INSTANCE_NAME',
@@ -12,35 +11,30 @@ export const changeStreamType = streamType => ({
   streamType,
 });
 
-export const addStreamToInstance = stream => ({
+export const addStreamToInstance = room => ({
   type: 'ADD_STREAM_TO_INSTANCE',
-  stream,
+  room,
 });
 
-export const removeStreamFromInstance = stream => ({
+export const removeStreamFromInstance = room => ({
   type: 'REMOVE_STREAM_FROM_INSTANCE',
-  stream,
+  room,
 });
 
-export const editInstance = instance => ({
-  type: 'EDIT_INSTANCE',
-  name: instance.name,
-  streamType: instance.streamType,
-  streams: instance.streams,
+export const saveInstance = () => ({
+  type: 'SAVE_INSTANCE',
 });
-// export const saveInstance = (state) => {
-//   // yield call()
-//   // for each stream, add membership
-//   // const promises = [];
-//   // const streams = state.streams;
-//   // const streamService = SYMPHONY.services.subscribe('stream-service');
-//   // for (const stream in streams) {
-//   //   if (streams[stream]) {
-//   //     promises.push(streamService.addRoomMembership(streams[stream], botUserId));
-//   //   }
-//   // }
-//   return {
-//     type: 'SAVE_INSTANCE',
-//     payload: streams,
-//   };
-// };
+
+export const submitDone = () => ({
+  type: 'SUBMIT_DONE',
+});
+
+// export const getInstanceList = () => ({
+//   type: 'FETCH_INSTANCE_LIST',
+// });
+export const getInstanceList = () => {
+  debugger;
+  return {
+    type: 'FETCH_INSTANCE_LIST',
+  };
+};

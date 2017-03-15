@@ -11,8 +11,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  addStreamToInstance: (stream) => { dispatch(addStreamToInstance(stream)); },
-  removeStreamFromInstance: (stream) => { dispatch(removeStreamFromInstance(stream)); },
+  addStreamToInstance: (room) => { dispatch(addStreamToInstance(room)); },
+  removeStreamFromInstance: (room) => { dispatch(removeStreamFromInstance(room)); },
 });
 
 const SuggestionsRoomsContainer = connect(

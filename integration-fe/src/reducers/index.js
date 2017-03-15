@@ -3,16 +3,17 @@ import userId from './userReducer';
 import instanceList from './instancesListReducer';
 import userRooms from './roomsReducer';
 import appName from './appNameReducer';
-import baseWebHookURL from './webHookURLReducer';
+// import baseWebHookURL from './webHookURLReducer';
 import instance from './instanceReducer';
+import error from './errorReducer';
 
 const rootReducer = combineReducers({
   appName,
-  baseWebHookURL,
   userId,
   userRooms,
   instanceList,
   instance,
+  error,
 });
 
 export default rootReducer;

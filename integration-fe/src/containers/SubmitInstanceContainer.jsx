@@ -1,3 +1,4 @@
+/* eslint-disable no-debugger */
 import { connect } from 'react-redux';
 import {
   saveInstance,
@@ -9,13 +10,19 @@ let store = {};
 const mapStateToProps = (state) => {
   store = Object.assign({}, state.instance);
   return {
-    status: state.instance.saved,
+    saved: state.instance.saved,
   };
 };
 
 const mapDispatchToProps = dispatch => ({
   saveInstance: () => { dispatch(saveInstance(store)); },
 });
+// const mapDispatchToProps = (dispatch) => {
+//   debugger;
+//   return {
+//     saveInstance: () => { dispatch(saveInstance(store)); },
+//   };
+// };
 
 const SubmitInstanceContainer = connect(
   mapStateToProps,

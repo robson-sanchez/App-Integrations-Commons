@@ -1,7 +1,5 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/no-unused-prop-types */
+/* eslint-disable no-debugger */
 import React, { Component, PropTypes } from 'react';
-import { hashHistory } from 'react-router';
 import './styles/styles.less';
 import { copyToClipboard } from '../../js/utils.service';
 
@@ -12,6 +10,7 @@ class DataRow extends Component {
     this.state = {
       enableCopy: true,
     };
+    // debugger;
     this.webhookurl = `${this.props.instance.baseWebhookUrl}/${this.props.instance.instanceId}`;
     this.onCopyURL = this.onCopyURL.bind(this);
     this.onClickEdit = this.onClickEdit.bind(this);
@@ -39,7 +38,6 @@ class DataRow extends Component {
 
   onClickEdit(e) {
     e.preventDefault();
-    hashHistory.push('/edit-view');
   }
 
   onClickRemove(e) {
@@ -56,15 +54,15 @@ class DataRow extends Component {
           {
             this.props.instance.streamType === 'IM' ?
               <span>One on one chat with {this.props.instance.appName}</span> :
-                <ul className='active-in'>
-                  {
-                    this.props.instance.postingLocationRooms.map((room, idx) =>
-                      <li key={idx}>
-                        <span>{room.name}</span>
-                      </li>
-                    )
-                  }
-                </ul>
+              <ul className='active-in'>
+                {
+                  this.props.instance.postingLocationRooms.map((room, idx) =>
+                    <li key={idx}>
+                      <span>{room.name}</span>
+                    </li>
+                  )
+                }
+              </ul>
           }
         </td>
         <td>
@@ -85,12 +83,12 @@ class DataRow extends Component {
                 >
                   Copy URL
                 </a> :
-                  <a
-                    href='#'
-                    data-copytarget={`#webhook-url-${this.props.id}`}
-                  >
-                    Copy URL
-                  </a>
+                <a
+                  href='#'
+                  data-copytarget={`#webhook-url-${this.props.id}`}
+                >
+                  Copy URL
+                </a>
             }
           </div>
         </td>
@@ -111,10 +109,10 @@ class DataRow extends Component {
 DataRow.propTypes = {
   instance: PropTypes.shape({
     name: PropTypes.string.isRequired,
-    appName: PropTypes.string,
+    appName: PropTypes.string.isRequired,
     streamType: PropTypes.string.isRequired,
-    instanceId: PropTypes.string,
-    baseWebhookUrl: PropTypes.string,
+    instanceId: PropTypes.string.isRequired,
+    baseWebhookUrl: PropTypes.string.isRequired,
     postingLocationRooms: PropTypes.arrayOf(PropTypes.object),
     lastPosted: PropTypes.string.isRequired,
   }),
