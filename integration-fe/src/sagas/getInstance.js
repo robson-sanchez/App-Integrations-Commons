@@ -4,7 +4,7 @@ import { getInstance as activeInstance } from './apiCalls';
 export function* getInstance() {
   try {
     const instance = yield call(activeInstance);
-    yield put({ type: 'GET_ACTIVE_INSTANCE', instance });
+    yield put({ type: 'GET_ACTIVE_INSTANCE_RESETED', instance });
   } catch (error) {
     yield put({ type: 'FETCH_FAILED', error });
   }

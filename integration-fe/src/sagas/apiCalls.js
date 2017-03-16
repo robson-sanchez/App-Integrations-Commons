@@ -3,7 +3,7 @@
 /* eslint-disable no-unused-vars */
 import { Utils } from '../js/utils.service';
 
-
+/* eslint-disable no-debugger */
 const configurationId = Utils.getParameterByName('configurationId');
 const botUserId = Utils.getParameterByName('botUserId');
 const appName = Utils.getParameterByName('id');
@@ -11,8 +11,6 @@ const baseUrl = `${window.location.protocol}//${window.location.hostname}/integr
 const baseWebHookURL = `${baseUrl}/v1/whi/${appName}/${configurationId}`;
 
 export const getAppName = () => appName;
-
-// export const getBaseWebHookURL = () => baseWebHookURL;
 
 export const getInstance = () => ({
   instanceId: null,
@@ -24,6 +22,16 @@ export const getInstance = () => ({
   baseWebHookURL,
   postingLocationRooms: [],
   streams: [],
+});
+
+export const setInstance = _instance => ({
+  instanceId: _instance.instanceId,
+  name: _instance.name,
+  configurationId,
+  streamType: _instance.streamType,
+  lastPosted: _instance.lastPosted,
+  baseWebHookURL: _instance.baseWebHookURL,
+  postingLocationRooms: _instance.postingLocationRooms.slice(),
 });
 
 export const getUserId = () => {
@@ -43,9 +51,15 @@ export const getList = () => {
 };
 
 export const addMembership = (stream) => {
+  debugger;
   const streamService = SYMPHONY.services.subscribe('stream-service');
-  streamService.addRoomMembership(stream, botUserId);
-  return { message: 'ok' };
+  return streamService.addRoomMembership(stream, botUserId);
+};
+
+export const createIM = () => {
+  // debugger;
+  const streamService = SYMPHONY.services.subscribe('stream-service');
+  return streamService.createIM([botUserId]);
 };
 
 export const saveInstance = (state) => {
@@ -66,7 +80,31 @@ export const saveInstance = (state) => {
     creatorId: state.userId,
     optionalProperties,
   };
+  // debugger;
   // save the instance
   const integrationConfigService = SYMPHONY.services.subscribe('integration-config');
   return integrationConfigService.createConfigurationInstance(configurationId, payload);
+};
+
+export const editInstance = (state) => {
+  // build Optional Properties
+  let opStreams = '';
+  state.instance.streams.map((stream, idx) => {
+    if (idx === 0) {
+      opStreams += `"${stream}"`;
+    } else {
+      opStreams += `, "${stream}"`;
+    }
+  });
+  const optionalProperties = `{"owner": "${state.userId}", "streams": [${opStreams}], "streamType": "${state.instance.streamType}"}`;
+  // build payload
+  const payload = {
+    instanceId: state.instance.instanceId,
+    configurationId,
+    name: state.instance.name,
+    optionalProperties,
+  };
+  const integrationConfigService = SYMPHONY.services.subscribe('integration-config');
+  return integrationConfigService.updateConfigurationInstanceById(
+    configurationId, state.instance.instanceId, payload);
 };

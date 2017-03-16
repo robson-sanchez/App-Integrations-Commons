@@ -6,7 +6,7 @@ import SubmitInstanceContainer from '../containers/SubmitInstanceContainer';
 
 const CreateView = () => (
   <div>
-    <IntegrationHeader />
+    <IntegrationHeader showSubTitle={false} />
     <InputDescriptionContainer />
     <PostingLocationContainer />
     <SubmitInstanceContainer />

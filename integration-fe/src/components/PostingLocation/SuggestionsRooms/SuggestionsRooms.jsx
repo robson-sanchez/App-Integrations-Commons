@@ -31,9 +31,43 @@ export class SuggestionsRooms extends Component {
   componentWillMount() {
     const _suggestions = this.props.userRooms.slice();
     this.sort(_suggestions, 'name');
-    this.setState({
-      suggestionsList: _suggestions,
-    });
+    debugger;
+    if (this.props.filters.length > 0) {
+      const rooms = []; // store the indexes to be removed
+      this.props.filters.map((_filter) => {
+        // store the _suggestions array indexes that are posting locations
+        for (let k = 0, n = _suggestions.length; k < n; k += 1) {
+          if (_suggestions[k].threadId === _filter.threadId) {
+            rooms.push(k);
+          }
+        }
+        // remove all posting locations from the _suggestions array
+        for (let i = 0, n = _suggestions.length; i < n; i += 1) {
+          for (let j = 0, l = rooms.length; j < l; j += 1) {
+            if (i === rooms[j]) {
+              _suggestions.splice(i, 1);
+              rooms.splice(j, 1);
+              for (let k = 0, s = rooms.length; k < s; k += 1) {
+                rooms[k] -= 1;
+              }
+              i -= 1;
+              break;
+            }
+          }
+        }
+      });
+      this.setState({
+        filters: this.props.filters.slice(),
+        suggestionsList: _suggestions.slice(),
+      });
+      this.props.resetPostingLocation();
+      // add the posting locations to the instance stream state
+      this.props.filters.map(item => this.props.addStreamToInstance(item));
+    } else {
+      this.setState({
+        suggestionsList: _suggestions,
+      });
+    }
   }
 
   componentDidMount() {
@@ -244,7 +278,7 @@ export class SuggestionsRooms extends Component {
             )
           }
         </ul>
-        { this.state.filters.length > 0 &&
+        {this.state.filters.length > 0 &&
           (
             this.state.filters.map((room, idx) =>
               <RoomBox
@@ -256,8 +290,8 @@ export class SuggestionsRooms extends Component {
                 creatorPrettyName={room.creatorPrettyName}
                 removeFilter={this.removeFilter}
               />
-          )
-        )}
+            )
+          )}
       </div>
     );
   }
@@ -266,7 +300,13 @@ export class SuggestionsRooms extends Component {
 SuggestionsRooms.propTypes = {
   addStreamToInstance: PropTypes.func.isRequired,
   removeStreamFromInstance: PropTypes.func.isRequired,
+  resetPostingLocation: PropTypes.func.isRequired,
   userRooms: PropTypes.arrayOf(PropTypes.object).isRequired,
+  filters: PropTypes.arrayOf(PropTypes.object),
+};
+
+SuggestionsRooms.defaultProps = {
+  filters: [],
 };
 
 export default SuggestionsRooms;

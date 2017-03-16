@@ -1,4 +1,3 @@
-/* eslint-disable no-debugger */
 import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 import { hashHistory } from 'react-router';
@@ -9,10 +8,8 @@ import '../../styles/main.less';
 
 class SubmitConfirmation extends Component {
   componentWillReceiveProps(nextProps) {
-    debugger;
     if (this.props.loading !== nextProps.loading) {
       if (nextProps.loading) {
-        debugger;
         hashHistory.push('/');
       }
     }
@@ -34,16 +31,9 @@ SubmitConfirmation.propTypes = {
   loading: PropTypes.bool.isRequired,
 };
 
-// const mapStateToProps = state => ({
-//   saved: state.instance.saved,
-// });
-const mapStateToProps = (state) => {
-  debugger;
-  return {
-    // saved: state.instance.saved,
-    loading: state.instanceList.loading,
-  };
-};
+const mapStateToProps = state => ({
+  loading: state.instanceList.loading,
+});
 
 const mapDispatchToProps = dispatch => ({
   callSubmitDone: () => { dispatch(submitDone()); },

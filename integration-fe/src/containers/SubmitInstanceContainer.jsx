@@ -2,6 +2,7 @@
 import { connect } from 'react-redux';
 import {
   saveInstance,
+  editInstance,
 } from '../actions';
 import SubmitInstance from '../components/SubmitInstance/SubmitInstance';
 
@@ -11,18 +12,14 @@ const mapStateToProps = (state) => {
   store = Object.assign({}, state.instance);
   return {
     saved: state.instance.saved,
+    instanceId: state.instance.instanceId,
   };
 };
 
 const mapDispatchToProps = dispatch => ({
   saveInstance: () => { dispatch(saveInstance(store)); },
+  editInstance: () => { dispatch(editInstance(store)); },
 });
-// const mapDispatchToProps = (dispatch) => {
-//   debugger;
-//   return {
-//     saveInstance: () => { dispatch(saveInstance(store)); },
-//   };
-// };
 
 const SubmitInstanceContainer = connect(
   mapStateToProps,

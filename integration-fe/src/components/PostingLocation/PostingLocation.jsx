@@ -1,4 +1,5 @@
 import React, { PropTypes, Component } from 'react';
+/* eslint-disable no-debugger */
 import SuggestionsRoomsContainer from './SuggestionsRooms/SuggestionsRoomsContainer';
 import './styles/styles.less';
 
@@ -11,6 +12,15 @@ export class PostingLocation extends Component {
       suggestions: false,
     };
     this.onChange = this.onChange.bind(this);
+  }
+
+  componentWillMount() {
+    debugger;
+    if (this.props.instance.instanceId !== null) {
+      this.setState({
+        suggestions: true,
+      });
+    }
   }
 
   onChange(e) {
@@ -62,6 +72,7 @@ export class PostingLocation extends Component {
 
 PostingLocation.propTypes = {
   streamType: PropTypes.string.isRequired,
+  instance: PropTypes.shape(),
   switchStreamType: PropTypes.func.isRequired,
 };
 

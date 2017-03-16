@@ -1,24 +1,26 @@
 /* eslint-disable no-debugger */
+/* eslint-disable no-unused-vars */
 import React, { Component, PropTypes } from 'react';
+import { hashHistory } from 'react-router';
 import DataRow from './DataRow';
 import Spinner from '../../components/Spinner/Spinner';
 import '../../styles/main.less';
 import './styles/styles.less';
 
 class TableInstance extends Component {
+  constructor(props) {
+    super(props);
+    this.onClickEdit = this.onClickEdit.bind(this);
+  }
+
   componentDidMount() {
-    debugger;
     this.props.getInstanceList();
   }
 
-  /* componentWillReceiveProps(nextProps) {
-    debugger;
-    if (this.props.loading !== nextProps.loading) {
-      if (nextProps.loading) {
-        this.props.getInstanceList();
-      }
-    }
-  }*/
+  onClickEdit(_instance) {
+    this.props.showEditInstanceView(_instance);
+    hashHistory.push('/create-view');
+  }
 
   render() {
     return (
@@ -43,12 +45,18 @@ class TableInstance extends Component {
                   appName: this.props.appName,
                   streamType: item.streamType,
                   instanceId: item.instanceId,
-                  baseWebhookUrl: this.props.baseWebHookURL,
+                  baseWebHookURL: this.props.baseWebHookURL,
                   postingLocationRooms: item.postingLocationRooms,
                   lastPosted: item.lastPosted,
                 };
-                debugger;
-                return <DataRow instance={_instance} key={index} id={index} />;
+                return (
+                  <DataRow
+                    instance={_instance}
+                    onClickEdit={this.onClickEdit}
+                    key={index}
+                    id={index}
+                  />
+                );
               })}
             </tbody>
           </table>
@@ -62,8 +70,9 @@ TableInstance.propTypes = {
   appName: PropTypes.string.isRequired,
   instanceList: PropTypes.arrayOf(PropTypes.object).isRequired,
   loading: PropTypes.bool.isRequired,
-  baseWebHookURL: PropTypes.string.isRequired,
+  baseWebHookURL: PropTypes.string,
   getInstanceList: PropTypes.func.isRequired,
+  showEditInstanceView: PropTypes.func.isRequired,
 };
 
 export default TableInstance;

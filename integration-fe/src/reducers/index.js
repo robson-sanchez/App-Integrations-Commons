@@ -3,7 +3,6 @@ import userId from './userReducer';
 import instanceList from './instancesListReducer';
 import userRooms from './roomsReducer';
 import appName from './appNameReducer';
-// import baseWebHookURL from './webHookURLReducer';
 import instance from './instanceReducer';
 import error from './errorReducer';
 

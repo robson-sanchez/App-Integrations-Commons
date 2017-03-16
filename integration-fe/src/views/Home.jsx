@@ -6,7 +6,7 @@ import ConfigureNew from '../components/ConfigureNew/ConfigureNew';
 
 const Home = () => (
   <div>
-    <IntegrationHeader />
+    <IntegrationHeader showSubTitle={false} />
     <SetupInstructions />
     <ConfigureNew />
     <TableInstanceContainer />

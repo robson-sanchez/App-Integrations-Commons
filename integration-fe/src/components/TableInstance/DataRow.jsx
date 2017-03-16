@@ -10,8 +10,7 @@ class DataRow extends Component {
     this.state = {
       enableCopy: true,
     };
-    // debugger;
-    this.webhookurl = `${this.props.instance.baseWebhookUrl}/${this.props.instance.instanceId}`;
+    this.webhookurl = `${this.props.instance.baseWebHookURL}/${this.props.instance.instanceId}`;
     this.onCopyURL = this.onCopyURL.bind(this);
     this.onClickEdit = this.onClickEdit.bind(this);
     this.onClickRemove = this.onClickRemove.bind(this);
@@ -38,6 +37,7 @@ class DataRow extends Component {
 
   onClickEdit(e) {
     e.preventDefault();
+    this.props.onClickEdit(this.props.instance);
   }
 
   onClickRemove(e) {
@@ -112,11 +112,12 @@ DataRow.propTypes = {
     appName: PropTypes.string.isRequired,
     streamType: PropTypes.string.isRequired,
     instanceId: PropTypes.string.isRequired,
-    baseWebhookUrl: PropTypes.string.isRequired,
+    baseWebHookURL: PropTypes.string.isRequired,
     postingLocationRooms: PropTypes.arrayOf(PropTypes.object),
     lastPosted: PropTypes.string.isRequired,
   }),
   id: PropTypes.number.isRequired,
+  onClickEdit: PropTypes.func.isRequired,
 };
 
 export default DataRow;

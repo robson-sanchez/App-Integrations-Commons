@@ -12,7 +12,6 @@ class WebHookURLCopy extends Component {
     };
     this.webhookurl = `${this.props.baseWebHookURL}/${this.props.instanceId}`;
     this.onCopyURL = this.onCopyURL.bind(this);
-    debugger;
   }
 
   onCopyURL(e) {
@@ -75,17 +74,17 @@ WebHookURLCopy.propTypes = {
   baseWebHookURL: PropTypes.string.isRequired,
 };
 
-// const mapStateToProps = state => ({
-//   instanceId: state.instance.instanceId,
-//   baseWebhookUrl: state.instance.baseWebhookUrl,
-// });
-const mapStateToProps = (state) => {
-  debugger;
-  return {
-    instanceId: state.instance.instanceId,
-    baseWebHookURL: state.instance.baseWebHookURL,
-  };
-};
+const mapStateToProps = state => ({
+  instanceId: state.instance.instanceId,
+  baseWebHookURL: state.instance.baseWebHookURL,
+});
+// const mapStateToProps = (state) => {
+//   debugger;
+//   return {
+//     instanceId: state.instance.instanceId,
+//     baseWebHookURL: state.instance.baseWebHookURL,
+//   };
+// };
 
 export default connect(
   mapStateToProps,

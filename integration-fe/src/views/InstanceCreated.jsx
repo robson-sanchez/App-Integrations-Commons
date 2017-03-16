@@ -7,7 +7,7 @@ import SubmitConfirmation from '../components/SubmitConfirmation/SubmitConfirmat
 
 const InstanceCreated = () => (
   <div>
-    <IntegrationHeader />
+    <IntegrationHeader showSubTitle={false} />
     <InputDescriptionInfo />
     <PostingLocationInfo />
     <WebHookURLCopy />
