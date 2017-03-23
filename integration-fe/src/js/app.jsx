@@ -14,9 +14,6 @@ const params = {
 
 const dependencies = [
   'ui',
-  'modules',
-  'applications-nav',
-  'integration-config',
   'extended-user-service',
   'stream-service',
   'integration-config',

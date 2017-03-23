@@ -1,4 +1,3 @@
-/* eslint-disable no-debugger */
 import React, { Component, PropTypes } from 'react';
 import './styles/styles.less';
 import { copyToClipboard } from '../../js/utils.service';
@@ -42,6 +41,7 @@ class DataRow extends Component {
 
   onClickRemove(e) {
     e.preventDefault();
+    this.props.onClickRemove(this.props.instance);
   }
 
   render() {
@@ -118,6 +118,7 @@ DataRow.propTypes = {
   }),
   id: PropTypes.number.isRequired,
   onClickEdit: PropTypes.func.isRequired,
+  onClickRemove: PropTypes.func.isRequired,
 };
 
 export default DataRow;

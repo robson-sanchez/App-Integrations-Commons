@@ -1,7 +1,10 @@
-/* eslint-disable no-debugger */
+import {
+  SET_APP_NAME,
+} from '../actions';
+
 const appName = (state = '', action) => {
   switch (action.type) {
-    case 'SET_APP_NAME':
+    case SET_APP_NAME:
       return action.payload;
     default:
       return state;

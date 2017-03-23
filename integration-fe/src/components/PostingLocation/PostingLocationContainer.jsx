@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
 import {
   changeStreamType,
-} from '../actions/';
-import PostingLocation from '../components/PostingLocation/PostingLocation';
+} from '../../actions/';
+import PostingLocation from './PostingLocation';
 
 const mapStateToProps = state => ({
   streamType: state.instance.streamType,

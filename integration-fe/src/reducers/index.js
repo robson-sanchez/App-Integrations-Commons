@@ -4,6 +4,7 @@ import instanceList from './instancesListReducer';
 import userRooms from './roomsReducer';
 import appName from './appNameReducer';
 import instance from './instanceReducer';
+import message from './messagesReducer';
 import error from './errorReducer';
 
 const rootReducer = combineReducers({
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
   userRooms,
   instanceList,
   instance,
+  message,
   error,
 });
 

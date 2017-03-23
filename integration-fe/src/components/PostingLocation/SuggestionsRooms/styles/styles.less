@@ -9,37 +9,49 @@
   padding-top: 0;
   max-width: @max-width-component;
 
-  .input-search-container {
+  .required {
     display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-between;
     width: 100%;
-    max-width: @max-width-component;
-    height: @search-height;
-    margin: 0;
-    border-radius: 0.125rem;
-    box-sizing: border-box;
 
-    input {
-      height: @search-height !important;
-      border: none !important;
-      margin: 0 !important;
+    .input-search-container {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      width: 97%;
+      height: @search-height;
+      margin: 0;
+      border-radius: 0.125rem;
       box-sizing: border-box;
-      background: none !important;
+
+      input {
+        height: @search-height !important;
+        border: none !important;
+        margin: 0 !important;
+        box-sizing: border-box;
+        background: none !important;
+      }
+
+      button {
+        width: 2.188rem;
+        height: @search-height;
+        padding: 0;
+        background: none;
+        border: none;
+        cursor: pointer;
+      }
     }
 
-    button {
-      width: 2.188rem;
-      height: @search-height;
-      padding: 0;
-      background: none;
-      border: none;
-      cursor: pointer;
+    span {
+      font-size: 7px;
+      color: #f68128;
     }
   }
 
   .filter-container {
-    width: 100%;
+    width: 97%;
     margin: 0;
     padding: 0;
     box-sizing: border-box;

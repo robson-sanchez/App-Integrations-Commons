@@ -1,5 +1,4 @@
-/* eslint-disable no-debugger */
-/* eslint-disable no-unused-vars */
+/* eslint-disable react/no-unused-prop-types */
 import React, { Component, PropTypes } from 'react';
 import { hashHistory } from 'react-router';
 import DataRow from './DataRow';
@@ -11,6 +10,7 @@ class TableInstance extends Component {
   constructor(props) {
     super(props);
     this.onClickEdit = this.onClickEdit.bind(this);
+    this.onClickRemove = this.onClickRemove.bind(this);
   }
 
   componentDidMount() {
@@ -18,14 +18,19 @@ class TableInstance extends Component {
   }
 
   onClickEdit(_instance) {
+    this.props.resetMessage();
     this.props.showEditInstanceView(_instance);
-    hashHistory.push('/create-view');
+    hashHistory.push('/edit-view');
+  }
+
+  onClickRemove(_instance) {
+    this.props.showEditInstanceView(_instance);
+    hashHistory.push('/remove-view');
   }
 
   render() {
     return (
       <div>
-        <span>Hi</span>
         <Spinner loading={this.props.loading} />
         <div className='wrapper table-instance'>
           <table className={this.props.loading ? 'instances' : 'instances table-opacity-1'}>
@@ -53,6 +58,7 @@ class TableInstance extends Component {
                   <DataRow
                     instance={_instance}
                     onClickEdit={this.onClickEdit}
+                    onClickRemove={this.onClickRemove}
                     key={index}
                     id={index}
                   />
@@ -73,6 +79,7 @@ TableInstance.propTypes = {
   baseWebHookURL: PropTypes.string,
   getInstanceList: PropTypes.func.isRequired,
   showEditInstanceView: PropTypes.func.isRequired,
+  resetMessage: PropTypes.func.isRequired,
 };
 
 export default TableInstance;

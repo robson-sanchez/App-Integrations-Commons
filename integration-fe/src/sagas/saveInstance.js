@@ -1,37 +1,36 @@
-/* eslint-disable no-debugger */
-/* eslint-disable no-unused-vars */
-import { call, put, take, select } from 'redux-saga/effects';
+import { call, put, select } from 'redux-saga/effects';
+import {
+  FAILED_OPERATION,
+  SUCCESSFULLY_CREATED,
+} from '../actions';
 import {
   saveInstance as apiSaveInstance,
   addMembership,
   createIM,
+  sendWelcomeMessage,
 } from './apiCalls';
 
 export function* saveInstance() {
-  let add,
-    imStream;
+  let imStream,
+    success;
   try {
-    // yield take('SAVE_INSTANCE');
     const state = yield select();
     const instance = state.instance;
-    // debugger;
     if (instance.streamType === 'IM') {
       try {
         imStream = yield call(createIM);
-        // debugger;
         instance.streams.push(imStream.id);
       } catch (error) {
-        // debugger;
-        yield put({ type: 'CREATE_IM_FAILED', error });
+        yield put({ type: FAILED_OPERATION, error });
       }
     } else if (instance.streamType === 'CHATROOM') {
       if (instance.streams.length > 0) {
         for (const stream in instance.streams) {
           if (instance.streams[stream]) {
             try {
-              add = yield call(addMembership, instance.streams[stream]);
+              success = yield call(addMembership, instance.streams[stream]);
             } catch (error) {
-              yield put({ type: 'ADD_MEMBER_SHIP_FAILED', error });
+              yield put({ type: FAILED_OPERATION, error });
             }
           }
         }
@@ -41,9 +40,11 @@ export function* saveInstance() {
     const response = yield call(apiSaveInstance, state);
     instance.instanceId = response.instanceId;
     instance.lastPosted = response.lastModifiedDate;
-    yield put({ type: 'SAVE_INSTANCE_SUCCESS', instance });
+    success = yield put({ type: SUCCESSFULLY_CREATED, instance });
+    if (success) {
+      yield call(sendWelcomeMessage, instance);
+    }
   } catch (error) {
-    // debugger;
-    yield put({ type: 'FETCH_FAILED', error });
+    yield put({ type: FAILED_OPERATION });
   }
 }

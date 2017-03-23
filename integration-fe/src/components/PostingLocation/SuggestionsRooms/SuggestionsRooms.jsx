@@ -1,4 +1,5 @@
 /* eslint-disable no-debugger */
+/* eslint-disable react/no-unused-prop-types */
 import React, { PropTypes, Component } from 'react';
 import RoomBox from '../RoomBox/RoomBox';
 import './styles/styles.less';
@@ -13,7 +14,8 @@ export class SuggestionsRooms extends Component {
       filteredRooms: [],    // rooms that appears according to user typing
       suggestionsList: [],  // rooms available to be filtered
       listening: false,     // check if input search has event listener
-      focused: -1,          // handles list items focus
+      focused: -1,          // handles list items focus,
+      filled: false,
     };
     this.container = null;
     this.input = null;
@@ -31,7 +33,6 @@ export class SuggestionsRooms extends Component {
   componentWillMount() {
     const _suggestions = this.props.userRooms.slice();
     this.sort(_suggestions, 'name');
-    debugger;
     if (this.props.filters.length > 0) {
       const rooms = []; // store the indexes to be removed
       this.props.filters.map((_filter) => {
@@ -79,6 +80,7 @@ export class SuggestionsRooms extends Component {
     if (target.value === '') {
       this.setState({
         filteredRooms: [],
+        filled: false,
       });
       return;
     }
@@ -197,6 +199,7 @@ export class SuggestionsRooms extends Component {
       focused: -1,
       filters: this.state.filters.concat([filter]),
       suggestionsList: suggestions.slice(),
+      filled: true,
     });
     this.props.addStreamToInstance(postingLocationRoom);
     this.input.value = '';
@@ -206,6 +209,7 @@ export class SuggestionsRooms extends Component {
   removeFilter(_id) {
     const suggestions = this.state.suggestionsList.slice();
     const _filters = this.state.filters.slice();
+    let required = true;
     let postingLocationRoom;
     _filters.some((item, idx) => {
       if (item.threadId === _id) {
@@ -218,9 +222,11 @@ export class SuggestionsRooms extends Component {
     this.sort(suggestions, 'name');
     this.input.value = '';
     this.input.focus();
+    required = _filters.length > 0;
     this.setState({
       suggestionsList: suggestions.slice(),
       filters: _filters.slice(),
+      filled: required,
     });
     this.props.removeStreamFromInstance(postingLocationRoom);
   }
@@ -236,17 +242,25 @@ export class SuggestionsRooms extends Component {
   render() {
     return (
       <div className='suggestions-rooms'>
-        <div className='input-search-container'>
-          <input
-            type='text'
-            onChange={this.onChangeSearch}
-            ref={(input) => { this.input = input; }}
-            // placeholder={this.props.loading ? 'Loading...' : 'Search rooms'}
-            placeholder='Search rooms'
-          />
-          <button onClick={this.clearInput}>
-            <i className='fa fa-times' />
-          </button>
+        <div className='required'>
+          <div className='input-search-container'>
+            <input
+              type='text'
+              onChange={this.onChangeSearch}
+              ref={(input) => { this.input = input; }}
+              // placeholder={this.props.loading ? 'Loading...' : 'Search rooms'}
+              placeholder='Search rooms'
+            />
+            <button onClick={this.clearInput}>
+              <i className='fa fa-times' />
+            </button>
+          </div>
+          {
+            !this.state.filled &&
+            <span>
+              <i className="fa fa-asterisk" aria-hidden="true" />
+            </span>
+          }
         </div>
         <ul
           className='filter-container'

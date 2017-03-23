@@ -3,6 +3,8 @@ import React from 'react';
 import { Router, Route, hashHistory } from 'react-router';
 import Home from '../views/Home';
 import CreateView from '../views/CreateView';
+import EditView from '../views/EditView';
+import RemoveView from '../views/RemoveView';
 import InstanceCreated from '../views/InstanceCreated';
 
 const Routes = () => (
@@ -10,6 +12,8 @@ const Routes = () => (
     {/* <Route path='/' component={InstanceCreated} />*/}
     <Route path='/' component={Home} />
     <Route path='/create-view' component={CreateView} />
+    <Route path='/edit-view' component={EditView} />
+    <Route path='/remove-view' component={RemoveView} />
     <Route path='/instance-created' component={InstanceCreated} />
   </Router>
 );

@@ -14,7 +14,6 @@ const dependencies = [
   'modules',
   'applications-nav',
   'account',
-  'integrationConfigService',
   'stream-service',
   'integration-config',
 ];

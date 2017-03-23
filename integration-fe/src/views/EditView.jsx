@@ -6,15 +6,14 @@ import SubmitInstanceContainer from '../components/SubmitInstance/SubmitInstance
 import MessageBox from '../components/MessageBox/MessageBox';
 import { operations } from '../actions';
 
-const CreateView = () => (
+const EditView = () => (
   <div>
     <MessageBox />
     <IntegrationHeader showSubTitle={false} />
     <InputDescription />
     <PostingLocationContainer />
-    <SubmitInstanceContainer operation={operations.CREATE} />
+    <SubmitInstanceContainer operation={operations.UPDATE} />
   </div>
 );
 
-export default CreateView;
-
+export default EditView;

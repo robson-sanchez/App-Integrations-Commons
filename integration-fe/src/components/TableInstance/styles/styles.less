@@ -4,7 +4,6 @@
 @table-font-size: 0.84rem;
 
 .table-instance {
-
   header {
     display: flex;
     width: 100%;
@@ -54,7 +53,9 @@
 
       &:nth-child(5) { width: 20%; }
 
-      span, label, a { font-size: @table-font-size; }
+      span, label, a { 
+        font-size: @table-font-size;  
+      }
 
       ul {
         float: left;
@@ -116,21 +117,21 @@
   }
 
   .dark, .dark-contrast {
-
     .instances {
-
-      tr th span {
-        color: #fff;
+      tr th, tr td {
+        span, label {
+          color: #fff;
+        }
       }
     }
   }
 
   .light, .light-contrast {
-
     .instances {
-
-      tr th span {
-        color: #000;
+      tr th, tr td {
+        span, label {
+          color: #000;
+        }
       }
     }
   }

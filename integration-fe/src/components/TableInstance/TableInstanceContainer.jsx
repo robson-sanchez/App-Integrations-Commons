@@ -1,11 +1,11 @@
-/* eslint-disable no-debugger */
 import { connect } from 'react-redux';
 import {
   getInstanceList,
-  showEditView,
-} from '../actions';
+  getInstanceInfo,
+  resetMessage as callResetMessage,
+} from '../../actions';
 
-import TableInstance from '../components/TableInstance/TableInstance';
+import TableInstance from './TableInstance';
 
 const mapStateToProps = state => ({
   userId: state.userId,
@@ -18,8 +18,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   getInstanceList: () => { dispatch(getInstanceList()); },
-  // editInstance: (_instance) => { dispatch(editInstance(_instance)); },
-  showEditInstanceView: (_instance) => { dispatch(showEditView(_instance)); },
+  showEditInstanceView: (_instance) => { dispatch(getInstanceInfo(_instance)); },
+  resetMessage: () => { dispatch(callResetMessage()); },
 });
 
 const TableInstanceContainer = connect(

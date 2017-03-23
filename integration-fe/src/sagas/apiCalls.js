@@ -1,9 +1,9 @@
-// import $ from 'jquery';
 /* eslint-disable no-debugger */
 /* eslint-disable no-unused-vars */
+import $ from 'jquery';
+// import axios from 'axios';
 import { Utils } from '../js/utils.service';
 
-/* eslint-disable no-debugger */
 const configurationId = Utils.getParameterByName('configurationId');
 const botUserId = Utils.getParameterByName('botUserId');
 const appName = Utils.getParameterByName('id');
@@ -51,13 +51,11 @@ export const getList = () => {
 };
 
 export const addMembership = (stream) => {
-  debugger;
   const streamService = SYMPHONY.services.subscribe('stream-service');
   return streamService.addRoomMembership(stream, botUserId);
 };
 
 export const createIM = () => {
-  // debugger;
   const streamService = SYMPHONY.services.subscribe('stream-service');
   return streamService.createIM([botUserId]);
 };
@@ -80,7 +78,6 @@ export const saveInstance = (state) => {
     creatorId: state.userId,
     optionalProperties,
   };
-  // debugger;
   // save the instance
   const integrationConfigService = SYMPHONY.services.subscribe('integration-config');
   return integrationConfigService.createConfigurationInstance(configurationId, payload);
@@ -107,4 +104,41 @@ export const editInstance = (state) => {
   const integrationConfigService = SYMPHONY.services.subscribe('integration-config');
   return integrationConfigService.updateConfigurationInstanceById(
     configurationId, state.instance.instanceId, payload);
+};
+
+export const removeInstance = (state) => {
+  const integrationConfService = SYMPHONY.services.subscribe('integration-config');
+  return integrationConfService.deactivateConfigurationInstanceById(
+    configurationId, state.instanceId);
+};
+
+export const sendWelcomeMessage = (state) => {
+  const baseURL = 'https://nexus.symphony.com/integration/v1/whi/devWebHookIntegration/578543c2e4b0edcf4f5ff520';
+  // const url = `${baseWebHookURL}/${state.instanceId}/welcome`;
+  const url = `${baseURL}/${state.instanceId}/welcome`;
+  const payload = {
+    streams: state.streams,
+  };
+  $.ajax({
+    url,
+    type: 'POST',
+    data: JSON.stringify(payload),
+    dataType: 'json',
+    contentType: 'application/json',
+    // success: (data) => { debugger; },
+    // error: (err) => { debugger; },
+  });
+  // axios.post(url, {
+  //   params: JSON.stringify(payload),
+  //   headers: {
+  //     'Data-Type': 'json',
+  //     'Content-Type': 'application/json',
+  //   },
+  // })
+  // .then((response) => {
+  //   debugger;
+  // })
+  // .catch((err) => {
+  //   debugger;
+  // });
 };

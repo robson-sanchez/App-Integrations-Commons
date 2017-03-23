@@ -1,5 +1,4 @@
 import React, { PropTypes, Component } from 'react';
-/* eslint-disable no-debugger */
 import SuggestionsRoomsContainer from './SuggestionsRooms/SuggestionsRoomsContainer';
 import './styles/styles.less';
 
@@ -7,7 +6,6 @@ import './styles/styles.less';
 export class PostingLocation extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       suggestions: false,
     };
@@ -15,8 +13,7 @@ export class PostingLocation extends Component {
   }
 
   componentWillMount() {
-    debugger;
-    if (this.props.instance.instanceId !== null) {
+    if (this.props.instance.instanceId !== null && this.props.streamType === 'CHATROOM') {
       this.setState({
         suggestions: true,
       });
