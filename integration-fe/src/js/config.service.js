@@ -1,8 +1,8 @@
 export default ({
-  app_title: 'Configure JIRA',
-  app_name: 'JIRA',
-  app_subtitle: 'JIRA Webhhok Integration',
-  IM_shorthand: 'JIRA', // will display "One on One with JIRA"
-  toogleSetupInstructions: true,
-  logo: 'jira_logo.png',
+  appTitle: 'Configure JIRASS',
+  appName: 'JIRAssss',
+  appSubTitle: 'JIRAsss Webhhok Integration',
+  appIMShortHand: 'JIRA', // will display "One on One with JIRA"
+  appToggleSetupInstructions: true,
+  appLogo: 'jira_logo.png',
 });

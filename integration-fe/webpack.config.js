@@ -59,9 +59,6 @@ module.exports = {
       from: './src/bundle.json'
     }]),
     new CopyWebpackPlugin([{
-      from: './src/js/symphony-api.js'
-    }]),
-    new CopyWebpackPlugin([{
       from: './src/img', to: 'img'
     }]),
   ],
