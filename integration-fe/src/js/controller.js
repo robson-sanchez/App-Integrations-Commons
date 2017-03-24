@@ -1,5 +1,8 @@
 import 'babel-polyfill';
-import commons from 'symphony-integration-commons';
-import config from './config.service';
+import { register } from 'symphony-integration-commons';
 
-commons.register(config);
+/*
+* register                          invokes the register function from App-Commons module
+* @param          SYMPHONY          Global SYMPHONY object
+*/
+register(SYMPHONY);
