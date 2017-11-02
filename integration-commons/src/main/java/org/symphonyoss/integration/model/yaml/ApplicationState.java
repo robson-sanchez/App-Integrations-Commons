@@ -25,7 +25,6 @@ public enum ApplicationState {
   PROVISIONED,
   REMOVED,
   FAILED,
-  SKIPPED,
-  UNKNOWN
+  SKIPPED
 
 }

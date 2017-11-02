@@ -16,7 +16,7 @@
 
 package org.symphonyoss.integration.model.yaml;
 
-import static org.symphonyoss.integration.model.yaml.ApplicationState.UNKNOWN;
+import static org.symphonyoss.integration.model.yaml.ApplicationState.PROVISIONED;
 
 import java.util.List;
 import java.util.Set;
@@ -46,7 +46,7 @@ public class Application {
 
   private boolean visible;
 
-  private ApplicationState state;
+  private ApplicationState state = ApplicationState.PROVISIONED;
 
   private List<AllowedOrigin> allowedOrigins;
 
@@ -132,7 +132,7 @@ public class Application {
 
   public ApplicationState getState() {
     if (state == null) {
-      return UNKNOWN;
+      return PROVISIONED;
     }
 
     return state;
